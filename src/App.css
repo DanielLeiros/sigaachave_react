@@ -4,6 +4,10 @@ table {
   width: 100%;
 }
 
+img {
+  max-width: 100%
+}
+
 td, th {
   border: 1px solid #dddddd;
   text-align: left;
@@ -15,6 +19,7 @@ tr:nth-child(even) {
 }
 
 .clicavel {
+  margin-right: 15px;
   cursor:pointer;
 }
 
@@ -24,7 +29,7 @@ tr:nth-child(even) {
 }
 
 .b-icon {
-  color: white !important;
+  color: black !important;
 }
 
 .r-icon {

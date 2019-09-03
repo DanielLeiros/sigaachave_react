@@ -55,7 +55,13 @@ class ListagemReservas extends React.Component {
 										<td>{item.data}</td>
 										<td>{item.isFixo ? "Fixo" : "Não-Fixo"}</td>
 										<td>{item.status}</td>
-										<td><i className="r-icon fas fa-trash-alt clicavel" 
+										<td>
+
+										<Link to={"/editar-reserva/"+item.id}>
+											<i className="b-icon fas fa-pencil-alt clicavel" ></i>
+										</Link>
+
+										<i className="r-icon fas fa-trash-alt clicavel" 
 												onClick={() => this.deletarReserva(item.id)}>
 											</i>
 										</td>

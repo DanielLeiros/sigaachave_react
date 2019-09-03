@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import logo from  './images/logo-n-bg.png'
 
 class SideBar extends React.Component{
   constructor(props){
@@ -26,6 +27,11 @@ handleToggleBar = () =>{
       <div className={this.state.navOpen}>
         <div className="wrapper">
             <div className="sidebar colaps" data-color="siga-a-chave">
+                 <div className="logo">
+                  <Link to="/" className="simple-text logo-normal">
+                    <img src={logo} alt="logo sigaAchave"/>
+                  </Link>
+                </div>
                 <div className="sidebar-wrapper" id="sidebar-wrapper">
                     <ul className="nav">
                     <li>

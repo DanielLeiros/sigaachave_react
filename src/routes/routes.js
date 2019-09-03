@@ -17,6 +17,7 @@ const Routes = () => {
 				<PrivateRoute exact path="/listagem-usuarios" component={props => <ListagemUsuarios {...props}/>} />
 				<PrivateRoute exact path="/cadastro-usuario" component={props => <CadastroUser {...props}/>} />
 				<PrivateRoute exact path="/cadastro-reserva" component={props => <CadastroReserva {...props}/>} />
+				<PrivateRoute exact path="/editar-reserva/:id" component={props => <CadastroReserva {...props}/>} />
 			</Switch>
 		</BrowserRouter>
 	)

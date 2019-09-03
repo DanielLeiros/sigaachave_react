@@ -6,10 +6,9 @@ import Sidebar from "../sideBar"
 import axios from 'axios';
 
 const CadastroReserva= (props) => {
-    
+
     const handleSubmit = (values) => {        
-        console.log(values)
-        axios.post('http://localhost:8080/sigaachave/reservas/adicionar/' +values.sala+"+"+"20-20-20"+"+"+values.isFixo
+        axios.post('http://localhost:8080/sigaachave/reservas/adicionar/' +values.sala+"+"+values.data+"+"+values.isFixo
          ).then(() =>alert("Deu certo")).catch(err => alert("Não foi possível cadastrar o usuário..."))
     }
     const validations = yup.object().shape({
