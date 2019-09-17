@@ -32,6 +32,10 @@ tr:nth-child(even) {
   color: black !important;
 }
 
+.g-icon {
+  color: green !important;
+}
+
 .r-icon {
   color: darkred !important;
 }

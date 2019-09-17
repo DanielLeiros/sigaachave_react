@@ -32,13 +32,19 @@ handleToggleBar = () =>{
                     <img src={logo} alt="logo sigaAchave"/>
                   </Link>
                 </div>
-                <div className="sidebar-wrapper" id="sidebar-wrapper">
+                <div className="sidebar-wrapper text-left" id="sidebar-wrapper">
                     <ul className="nav">
                     <li>
                       <Link to='/'><i className="w-icon fas fa-calendar-check"></i>Reservas</Link>
                     </li>
                     <li>
+                      <Link to='/reservas-pendentes'><i className="w-icon fas fa-eye"></i>Análise de reservas</Link>
+                    </li>
+                    <li>
                       <Link to='/listagem-usuarios'><i className="w-icon fas fa-user-plus"></i>Usuários</Link>
+                    </li>
+                    <li>
+                      <Link to='/listagem-salas'><i className="w-icon fas fa-map"></i>Salas</Link>
                     </li>
                     </ul>            
                 </div>
