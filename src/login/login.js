@@ -4,14 +4,26 @@ import logo from '../images/logo-n-bg.png';
 import img from '../images/ufrn-reitoria.jpg';
 import {ErrorMessage, Formik, Form, Field} from 'formik';
 import * as yup from "yup";
+import axios from 'axios';
+
+
 
 const Login = (props) => {
     const handleSubmit = values => {
-        props.history.push("/")
+        const instance = {
+            method: 'post',
+            url: 'http://localhost:8080/authenticate',
+            headers: {cpf: values.cpf, senha: values.password}
+          };
+        axios(instance).then((e) =>{
+            localStorage.setItem('token', e.data.token);
+            props.history.push("/")
+        }).catch((err) => console.log(err))
+        
     }
     const validations = yup.object().shape({
-        username:yup.string().required("Preencha o campo usuário"),
-        password:yup.string().min(6).required("Preencha o campo senha"),
+        cpf:yup.string().min(11).required("Preencha o campo Cpf"),
+        password:yup.string().min(3).required("Preencha o campo senha"),
     })
 
     return(
@@ -20,7 +32,7 @@ const Login = (props) => {
                 <div className="form-fields col-md-6 col-sm-12 align-self-center">
                     <div className="login-title">Autenticação de Usuário</div>
                     <Formik 
-                        initialValues={{username: "", password:""}}
+                        initialValues={{cpf: "", password:""}}
                         onSubmit={handleSubmit}
                         validationSchema={validations}
                     >
@@ -28,9 +40,9 @@ const Login = (props) => {
                         <Form className="app-form">
                             <div className="row justify-content-center">
                                 <div className="form-group text-left col-8">
-                                    <label className="exemple-username">Usuário:</label>
-                                    <Field name="username" className="form-control" placeholder="Usuário"/>
-                                    <ErrorMessage className="form-error" name="username" component="span"/>
+                                    <label className="exemple-cpf">Cpf:</label>
+                                    <Field name="cpf" className="form-control" placeholder="Cpf"/>
+                                    <ErrorMessage className="form-error" name="cpf" component="span"/>
                                 </div>
                                 <div className="form-group text-left col-8">
                                 <label className="exemple-password">Senha:</label>

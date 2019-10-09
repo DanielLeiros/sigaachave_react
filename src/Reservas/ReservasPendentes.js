@@ -2,6 +2,7 @@ import React from 'react';
 import Sidebar from '../sideBar'
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import { getToken } from '../security/auth'
 
 class ReservasPendentes extends React.Component {
 	constructor(props){
@@ -16,13 +17,21 @@ class ReservasPendentes extends React.Component {
 	}
 
     getReservas = () => {
-    	axios.get("http://localhost:8080/sigaachave/reservas/status/PENDENTE").then(response =>{
+		const token = getToken()
+    	axios.get("http://localhost:8080/sigaachave/reservas/status?status=PENDENTE", {headers:{token:token}}).then(response =>{
 			this.setState({listaReservas: response.data})
     	}).catch(saida => console.log(saida))
     }
 
     alterarStatusReserva = (id, status) => {
-    	axios.put("http://localhost:8080/sigaachave/reservas/"+ id +"/status/" + status).then(response =>{
+		const token = getToken()		
+		const instance = {
+            method: 'put',
+            url: "http://localhost:8080/sigaachave/reservas/atualizar?id="+id+"&status=" + status,
+            headers: {token: token}
+		  };
+		  console.log(instance)
+    	axios(instance).then(response =>{
 			this.getReservas("PENDENTES")
 			alert("Ação confirmada!")
     	}).catch(saida => console.log(saida))
