@@ -2,6 +2,7 @@ import React from 'react';
 import Sidebar from './sideBar'
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import { getToken } from './security/auth';
 
 class ListagemSalas extends React.Component {
 	constructor(props){
@@ -16,13 +17,20 @@ class ListagemSalas extends React.Component {
 	}
 
     getSalas = () => {
-    	axios.get("http://localhost:8080/sigaachave/salas").then(response =>{
+		const token = getToken()
+    	axios.get("http://localhost:8080/sigaachave/salas", {headers:{token: token }}).then(response =>{
 			this.setState({listaSalas: response.data})
     	}).catch(saida => console.log(saida))
     }
 
 	deletarSalas = (id) => {
-    	axios.delete("http://localhost:8080/sigaachave/salas/"+id+"/excluir").then(response =>{
+		const token = getToken()
+		const instance = {
+            method: 'delete',
+            url: "http://localhost:8080/sigaachave/salas/excluir?id="+id,
+            headers: {token: token}
+          };
+    	axios(instance).then(response =>{
 			this.getSalas()
 			alert("Deletada!")
     	}).catch(saida => console.log(saida))
