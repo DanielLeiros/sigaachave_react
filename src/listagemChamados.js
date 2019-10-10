@@ -36,16 +36,29 @@ class ListagemChamados extends React.Component {
     	}).catch(saida => console.log(saida))
     }
 
-    deletarChamado = (id) => {
+    aceitarChamado = (id, sala) => {
 		const token = getToken()
 		const instance = {
-            method: 'delete',
-            url: "http://localhost:8080/sigaachave/chamado/excluir?id="+id,
+            method: 'put',
+            url: `http://localhost:8080/sigaachave/chamado/atualizar?id=${id}&status=CONFIRMADO&sala=${sala}`,
             headers: {token: token}
           };
     	axios(instance).then(response =>{
 			this.getChamados()
-			alert("Deletada!")
+			alert("Chamado confirmado!")
+    	}).catch(saida => console.log(saida))
+	}
+	
+	executarChamado = (id, sala) => {
+		const token = getToken()
+		const instance = {
+            method: 'put',
+            url: `http://localhost:8080/sigaachave/chamado/atualizar?id=${id}&status=EM_EXECUCAO&sala=${sala}`,
+            headers: {token: token}
+          };
+    	axios(instance).then(response =>{
+			this.getChamados()
+			alert("Chamado em andamento!")
     	}).catch(saida => console.log(saida))
     }
 
@@ -76,7 +89,10 @@ class ListagemChamados extends React.Component {
 										<td>{item.status}</td>
 										<td>
 											<i className="g-icon fas fa-check clicavel" 
-													onClick={() => this.aceitarChamado(item.id)}>
+													onClick={() => this.aceitarChamado(item.id, item.sala)}>
+											</i>
+											<i className="y-icon fas fa-clock clicavel" 
+													onClick={() => this.executarChamado(item.id,item.sala)}>
 											</i>
 											<i className="r-icon fas fa-trash-alt clicavel" 
 													onClick={() => this.deletarChamado(item.id)}>

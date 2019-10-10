@@ -27,7 +27,7 @@ class ReservasPendentes extends React.Component {
 		const token = getToken()		
 		const instance = {
             method: 'put',
-            url: "http://localhost:8080/sigaachave/reservas/atualizar?id="+id+"&status=" + status,
+            url: "http://localhost:8080/sigaachave/reserva/atualizar?id="+id+"&status=" + status,
             headers: {token: token}
 		  };
 		  console.log(instance)
@@ -50,6 +50,7 @@ class ReservasPendentes extends React.Component {
 								<th>Id</th>
 								<th>Sala</th>
 								<th>Data</th>
+								<th>Horário</th>
 								<th>Tipo</th>
 								<th>Status</th>
 								<th>Ações</th>
@@ -61,7 +62,8 @@ class ReservasPendentes extends React.Component {
 									<tr key={key}>
 										<td>{item.id}</td>
 										<td>{item.sala}</td>
-										<td>{item.data}</td>
+										<td>{item.dataConsulta}</td>
+										<td>{item.horaConsulta + "h"}</td>
 										<td>{item.isFixo ? "Fixo" : "Não-Fixo"}</td>
 										<td>{item.status}</td>
 										<td>
