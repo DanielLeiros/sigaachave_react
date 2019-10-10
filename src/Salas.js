@@ -27,7 +27,7 @@ class ListagemSalas extends React.Component {
 		const token = getToken()
 		const instance = {
             method: 'delete',
-            url: "http://localhost:8080/sigaachave/salas/excluir?id="+id,
+            url: "http://localhost:8080/sigaachave/sala/excluir?id="+id,
             headers: {token: token}
           };
     	axios(instance).then(response =>{

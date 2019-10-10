@@ -6,7 +6,7 @@ import Sidebar from "../sideBar"
 import axios from 'axios';
 import { getToken } from '../security/auth';
 
-const CadastroReserva = (props) => {
+const CadastroChamado = (props) => {
 
     const [salas, setSalas] = useState([]);
 
@@ -23,14 +23,14 @@ const CadastroReserva = (props) => {
 
     const handleSubmit = (values) => {
         const token = getToken()        
-        axios.post(`http://localhost:8080/sigaachave/reserva/adicionar?idUsuario=1&sala=${values.sala}
-            &dataConsulta=${values.data}&horaConsulta=7&isFixa=${values.isFixo}`, {headers:{token: token }}
+        axios({method:'post', url:`http://localhost:8080/sigaachave/chamado/adicionar?idUsuario=1&sala=${values.sala}
+            &descricao=${values.descricao}`, headers:{token: token }}
          ).then(() =>alert("Deu certo")).catch(err => alert("Não foi possível registrar a reserva o usuário..."))
     }
 
     const validations = yup.object().shape({
-        sala:yup.string().required("Digite uma sala válida"),
-        data:yup.string().min(10).required(),
+        sala:yup.string().required("Insira uma sala válida"),
+        descricao:yup.string().required(),
     })
 
     return(
@@ -39,22 +39,15 @@ const CadastroReserva = (props) => {
             <div className="container-cadastro"> 
                 <div className="bg-form row">
                     <div className="form-fields col-12 align-self-center">
-                        <div className="login-title">Solicitar Reserva</div>
+                        <div className="login-title">Abrir Chamado</div>
                         <Formik 
-                            initialValues={{sala: "", data: "", isFixo: "false"}}
+                            initialValues={{sala: "", descricao: ""}}
                             onSubmit={handleSubmit}
                             validationSchema={validations}
                         >
 
                             <Form className="app-form">
                                 <div className="row justify-content-center">
-
-                                    <div className="form-group text-left col-6">
-                                    <label className="exemple-data">Data:</label>
-                                        <Field name="data" className="form-control" placeholder="Data"/>
-                                        <ErrorMessage className="form-error" name="data" component="span"/>
-                                    </div>
-                                
                                     <div className="form-group text-left col-6">
                                         <label className="exemple-sala">Sala:</label>
                                         <Field name="sala" className="form-control" component="select">
@@ -64,17 +57,10 @@ const CadastroReserva = (props) => {
                                         </Field>
                                         <ErrorMessage className="form-error" name="sala" component="span"/>                               
                                     </div>
-                                
-                                    <div className="form-group text-left col-6">
-                                        <label className="exemple-Tipo">Tipo de Atendimento:</label>
-                                        <Field className="form-control" component="select" name="isFixo">
-                                            <option value="false">Pontual</option>
-                                            <option value="true">Fixo</option>
-                                        </Field>
-                                        <ErrorMessage className="form-error" name="isFixo" component="span"/>  
-                                    </div>
-                                    <div className="form-group text-left col-6">
-                                        
+                                   <div className="form-group text-left col-6">
+                                        <label className="exemple-descricao">Descrição:</label>
+                                        <Field name="descricao" className="form-control" type="text-area" placeholder="Descrição"/>
+                                        <ErrorMessage className="form-error" name="descricao" component="span"/>                               
                                     </div>
                                 </div>
                                 <button className="btn btn-primary btn-md" type="submit">Cadastrar</button>
@@ -87,16 +73,4 @@ const CadastroReserva = (props) => {
     );
 }
 
-export default CadastroReserva;
-
-/*<DatePicker
-      selected={startDate}
-      onChange={date => setStartDate(date)}
-      locale="pt-BR"
-      showTimeSelect
-      timeFormat="p"
-      minTime={setHours(setMinutes(new Date(), 0), 7)}
-      maxTime={setHours(setMinutes(new Date(), 0), 17)}
-      timeIntervals={60}
-      dateFormat="Pp"
-    />*/
+export default CadastroChamado;

@@ -4,14 +4,18 @@ import * as yup from "yup";
 import './cadastro.css';
 import Sidebar from "../sideBar";
 import axios from 'axios';
+import { getToken } from '../security/auth';
 
 const CadastroUser = (props) => {
-    const handleSubmit = (values) => {        
-        axios.post('http://localhost:8080/sigaachave/usuarios/adicionar/' +values.nome+"+"+values.password+"+"+values.tipoUsuario
-         ).then(() =>alert("Deu certo")).catch(err => alert("Não foi possível cadastrar o usuário..."))
+    const handleSubmit = (values) => {  
+        const token = getToken()        
+        console.log(token)
+        axios.post(`http://localhost:8080/sigaachave/usuario/adicionar?nome=${values.nome}&cpf=${values.cpf}&senha=${values.password}&papel=${values.tipoUsuario}`
+                 ).then(() =>alert("Deu certo")).catch(err => alert("Não foi possível cadastrar o usuário..."))
     }
     const validations = yup.object().shape({
         nome:yup.string().required("Campo nome é obrigatório"),
+        cpf:yup.string().min(11).required("Campo CPF é obrigatório"),
         password:yup.string().min(8, "Deve conter no mínimo 8 caracteres").required("Campo senha é obrigatório"),
         passwordConfirm: yup.string().oneOf([yup.ref('password'), null], "Deve ser igual ao campo senha")
         .required('Campo de confirmação de senha é obrigatório')
@@ -25,7 +29,7 @@ const CadastroUser = (props) => {
                     <div className="form-fields col-12 align-self-center">
                         <div className="login-title">Cadastro de Usuário</div>
                         <Formik 
-                            initialValues={{nome:"", password: "", passwordConfirm: "",tipoUsuario: "USUARIO"}}
+                            initialValues={{nome:"", password: "", passwordConfirm: "",tipoUsuario: "USUARIO", cpf: ""}}
                             onSubmit={handleSubmit}
                             validationSchema={validations}
                         >
@@ -38,6 +42,11 @@ const CadastroUser = (props) => {
                                         <ErrorMessage className="form-error" name="nome" component="span"/>                               
                                     </div>
                                     <div className="form-group text-left col-6">
+                                        <label className="exemple-cpf">Cpf:</label>
+                                        <Field name="cpf" className="form-control" placeholder="cpf"/>
+                                        <ErrorMessage className="form-error" name="cpf" component="span"/>                               
+                                    </div>
+                                    <div className="form-group text-left col-6">
                                         <label className="exemple-Tipo">Tipo de usuário:</label>
                                         <Field className="form-control" component="select" name="tipoUsuario">
                                             <option value="USUARIO">Comum</option>
@@ -46,17 +55,6 @@ const CadastroUser = (props) => {
                                         </Field>
                                         <ErrorMessage className="form-error" name="tipoUsuario" component="span"/>  
                                     </div>
-
-    {/*                                <div className="form-group text-left col-6">
-                                        <label className="exemple-username">Sobrenome:</label>
-                                        <Field name="sobrenome" className="form-control" placeholder="Sobrenome"/>
-                                        <ErrorMessage className="form-error" name="email" component="span"/>                               
-                                    </div>*/}
-    {/*                                <div className="form-group text-left col-12">
-                                        <label className="exemple-username">E-mail:</label>
-                                        <Field name="email" className="form-control" placeholder="E-mail"/>
-                                        <ErrorMessage className="form-error" name="email" component="span"/>                               
-                                    </div>*/}
                                     <div className="form-group text-left col-6">
                                     <label className="exemple-password">Senha:</label>
                                         <Field name="password" className="form-control" placeholder="Senha"/>

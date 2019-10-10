@@ -27,7 +27,7 @@ class ListagemReservas extends React.Component {
 		const token = getToken()
 		const instance = {
             method: 'delete',
-            url: "http://localhost:8080/sigaachave/reservas/excluir?id="+id,
+            url: "http://localhost:8080/sigaachave/reserva/excluir?id="+id,
             headers: {token: token}
           };
     	axios(instance).then(response =>{
@@ -49,6 +49,7 @@ class ListagemReservas extends React.Component {
 								<th>Id</th>
 								<th>Sala</th>
 								<th>Data</th>
+								<th>Hora</th>
 								<th>Tipo</th>
 								<th>Status</th>
 								<th>Ações</th>
@@ -60,7 +61,8 @@ class ListagemReservas extends React.Component {
 									<tr key={key}>
 										<td>{item.id}</td>
 										<td>{item.sala}</td>
-										<td>{item.data}</td>
+										<td>{item.dataConsulta}</td>
+										<td>{item.horaConsulta + "h"}</td>
 										<td>{item.isFixo ? "Fixo" : "Não-Fixo"}</td>
 										<td>{item.status}</td>
 										<td>
@@ -81,3 +83,62 @@ class ListagemReservas extends React.Component {
 }
 
 export default ListagemReservas;
+
+
+/*
+render(){
+		const {listaReservas} = this.state
+		const style = {padding:5, backgroundColor: "lightgrey", width: 110,  display: "inline-block"}
+	    return(
+	        <Sidebar {...this.props} componente={
+	            <div className="counteiner-fluid">	            	
+	            	<div className="col-12 text-left" style={{display: "block"}}>
+		            	<h2 className="inline">Reservas</h2>
+		            	<button className="btn btn-primary novo-cadastro"><Link to="/cadastro-reserva">+ Nova Reserva</Link></button>
+					</div>
+					<div className="column" style={{padding: 10, display: "block", bordeRadius: 20}}>	
+						<ReactTable 
+							data={horarios} 
+							columns={columns} 
+							defaultPageSize={11} 
+							sortable={false}/>
+					</div>
+	            </div>
+	        } />
+	    );
+	}
+*/
+
+/*const horarios = [
+	{horario:'7:00-7:50', "sala 1": "Daphne Trindade", "sala 2": "Daniel Leiros","sala 3": "Daphne Trindade", "sala 4": "Daniel Leiros","sala 5": "Daphne Trindade", "sala 6": "Daniel Leiros","sala 7": "Daphne Trindade"},
+	{horario:'8:00-8:50', "sala 1": "Daphne Trindade", "sala 2": "Daniel Leiros","sala 3": "Daphne Trindade", "sala 4": "Daniel Leiros","sala 5": "Daphne Trindade", "sala 6": "Daniel Leiros","sala 7": "Daphne Trindade"},
+	{horario:'9:00-9:50', "sala 1": "Daphne Trindade", "sala 2": "Daniel Leiros","sala 3": "Daphne Trindade", "sala 4": "Daniel Leiros","sala 5": "Daphne Trindade", "sala 6": "Daniel Leiros","sala 7": "Daphne Trindade"},
+	{horario:'10:00-10:50', "sala 1": "Daphne Trindade", "sala 2": "Daniel Leiros","sala 3": "Daphne Trindade", "sala 4": "Daniel Leiros","sala 5": "Daphne Trindade", "sala 6": "Daniel Leiros","sala 7": "Daphne Trindade"},
+	{horario:'11:00-11:50', "sala 1": "Daphne Trindade", "sala 2": "Daniel Leiros","sala 3": "Daphne Trindade", "sala 4": "Daniel Leiros","sala 5": "Daphne Trindade", "sala 6": "Daniel Leiros","sala 7": "Daphne Trindade"},
+	{horario:'12:00-12:50', "sala 1": "Daphne Trindade", "sala 2": "Daniel Leiros","sala 3": "Daphne Trindade", "sala 4": "Daniel Leiros","sala 5": "Daphne Trindade", "sala 6": "Daniel Leiros","sala 7": "Daphne Trindade"},
+	{horario:'13:00-13:50', "sala 1": "Daphne Trindade", "sala 2": "Daniel Leiros","sala 3": "Daphne Trindade", "sala 4": "Daniel Leiros","sala 5": "Daphne Trindade", "sala 6": "Daniel Leiros","sala 7": "Daphne Trindade"},
+	{horario:'14:00-14:50', "sala 1": "Daphne Trindade", "sala 2": "Daniel Leiros","sala 3": "Daphne Trindade", "sala 4": "Daniel Leiros","sala 5": "Daphne Trindade", "sala 6": "Daniel Leiros","sala 7": "Daphne Trindade"},
+	{horario:'15:00-15:50', "sala 1": "Daphne Trindade", "sala 2": "Daniel Leiros","sala 3": "Daphne Trindade", "sala 4": "Daniel Leiros","sala 5": "Daphne Trindade", "sala 6": "Daniel Leiros","sala 7": "Daphne Trindade"},
+	{horario:'16:00-16:50', "sala 1": "Daphne Trindade", "sala 2": "Daniel Leiros","sala 3": "Daphne Trindade", "sala 4": "Daniel Leiros","sala 5": "Daphne Trindade", "sala 6": "Daniel Leiros","sala 7": "Daphne Trindade"},
+	{horario:'17:00-17:50', "sala 1": "Daphne Trindade", "sala 2": "Daniel Leiros","sala 3": "Daphne Trindade", "sala 4": "Daniel Leiros","sala 5": "Daphne Trindade", "sala 6": "Daniel Leiros","sala 7": "Daphne Trindade"}
+]
+
+const salas = ["sala 1","sala 2","sala 3","sala 4","sala 5","sala 6","sala 7"]
+
+// const columns = salas.map((el) => {
+// 	return (
+// 		{Header:el, accessor: el, Cell: () => }
+// 	)
+// })
+				
+
+const columns =
+[
+	{Header:"horarios", accessor: 'horario'},
+	{Header:"sala 1", accessor: "sala 1"},
+	{Header:"sala 2", accessor: "sala 2"},
+	{Header:"sala 3", accessor: "sala 3"},
+	{Header:"sala 4", accessor: "sala 4"},
+	{Header:"sala 5", accessor: "sala 5"},
+	{Header:"sala 6", accessor: "sala 6"},
+	{Header:"sala 7", accessor: "sala 7"}]*/
