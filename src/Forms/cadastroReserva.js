@@ -24,13 +24,14 @@ const CadastroReserva = (props) => {
     const handleSubmit = (values) => {
         const token = getToken()        
         axios.post(`http://localhost:8080/sigaachave/reserva/adicionar?idUsuario=1&sala=${values.sala}
-            &dataConsulta=${values.data}&horaConsulta=7&isFixa=${values.isFixo}`, {headers:{token: token }}
+            &dataConsulta=${values.data}&horaConsulta=${values.horario}&isFixa=${values.isFixo}`, {headers:{token: token }}
          ).then(() =>alert("Deu certo")).catch(err => alert("Não foi possível registrar a reserva o usuário..."))
     }
 
     const validations = yup.object().shape({
         sala:yup.string().required("Digite uma sala válida"),
         data:yup.string().min(10).required(),
+        horario:yup.string().required(),
     })
 
     return(
@@ -49,10 +50,17 @@ const CadastroReserva = (props) => {
                             <Form className="app-form">
                                 <div className="row justify-content-center">
 
-                                    <div className="form-group text-left col-6">
+                                    <div className="form-group text-left col-3">
                                     <label className="exemple-data">Data:</label>
-                                        <Field name="data" className="form-control" placeholder="Data"/>
+                                        <Field name="data" className="form-control" type="date" placeholder="Data"/>
                                         <ErrorMessage className="form-error" name="data" component="span"/>
+                                    </div>
+                                    <div className="form-group text-left col-3">
+                                    <label className="exemple-data">Horário:</label>
+                                        <Field name="horario" className="form-control" type="number" placeholder="Horário"
+                                        min="7" max="17" 
+                                        />
+                                        <ErrorMessage className="form-error" name="horario" component="span"/>
                                     </div>
                                 
                                     <div className="form-group text-left col-6">
