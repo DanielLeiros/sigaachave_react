@@ -23,9 +23,9 @@ const CadastroChamado = (props) => {
 
     const handleSubmit = (values) => {
         const token = getToken()        
-        axios({method:'post', url:`http://localhost:8080/sigaachave/chamado/adicionar?idUsuario=1&sala=${values.sala}
-            &descricao=${values.descricao}`, headers:{token: token }}
-         ).then(() =>alert("Deu certo")).catch(err => alert("Não foi possível registrar a reserva o usuário..."))
+        console.log(values.sala)
+        axios({method:'post', url:`http://localhost:8080/sigaachave/chamado/adicionar?idUsuario=1&sala=${values.sala}&descricao=${values.descricao}`, headers:{token: token }}
+         ).then(() =>alert("Deu certo")).catch(err => alert("Não foi possível registrar o chamado..."))
     }
 
     const validations = yup.object().shape({
@@ -37,7 +37,7 @@ const CadastroChamado = (props) => {
         <Sidebar {...props} 
         componente={
             <div className="container-cadastro"> 
-                <div className="bg-form row">
+                <div className="row">
                     <div className="form-fields col-12 align-self-center">
                         <div className="login-title">Abrir Chamado</div>
                         <Formik 

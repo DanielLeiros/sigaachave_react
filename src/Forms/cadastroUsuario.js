@@ -25,7 +25,7 @@ const CadastroUser = (props) => {
     return(
         <Sidebar {...props} componente={
             <div className="container-cadastro"> 
-                <div className="bg-form row">
+                <div className="row">
                     <div className="form-fields col-12 align-self-center">
                         <div className="login-title">Cadastro de Usuário</div>
                         <Formik 

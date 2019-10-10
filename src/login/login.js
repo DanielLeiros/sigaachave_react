@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './login.css';
 import logo from '../images/logo-n-bg.png';
 import img from '../images/ufrn-reitoria.jpg';
@@ -9,6 +9,11 @@ import axios from 'axios';
 
 
 const Login = (props) => {
+
+    useEffect(()=>{
+        document.body.className="container-login"
+    },[])
+
     const handleSubmit = values => {
         const instance = {
             method: 'post',
@@ -17,7 +22,6 @@ const Login = (props) => {
           };
         axios(instance).then((e) =>{
             localStorage.setItem('token', "Bearer "+e.data.token);
-            document.body.className="";
             props.history.push("/")
         }).catch((err) => console.log(err))
         
