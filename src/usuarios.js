@@ -27,7 +27,7 @@ class ListagemUsuarios extends React.Component {
 		const token = getToken();
 		const instance = {
             method: 'delete',
-            url: "http://localhost:8080/sigaachave/usuarios/excluir?id="+id,
+            url: "http://localhost:8080/sigaachave/usuario/excluir?id="+id,
             headers: {token: token}
           };
     	axios(instance).then(response =>{

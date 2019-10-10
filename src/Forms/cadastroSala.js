@@ -4,12 +4,14 @@ import * as yup from "yup";
 import './cadastro.css';
 import Sidebar from "../sideBar"
 import axios from 'axios';
+import { getToken } from '../security/auth';
 
 const CadastroSalas = (props) => {
 
-    const handleSubmit = (values) => {        
-        axios.post('http://localhost:8080/sigaachave/salas/adicionar/' +
-            values.nome+"+"+values.localizacao+"+"+values.descricao +"+"+values.permiteFixo
+    const handleSubmit = (values) => {    
+        const token = getToken()      
+        axios.post(`http://localhost:8080/sigaachave/sala/adicionar?nome=${values.nome}&localizacao=${values.localizacao}&descricao=${values.descricao}
+         &permiteFixo=${values.permiteFixo}`, {headers: {token:token}}
          ).then(() =>alert("Deu certo")).catch(err => alert("Não foi possível cadastrar o usuário..."))
     }
     const validations = yup.object().shape({

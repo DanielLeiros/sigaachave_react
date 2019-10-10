@@ -16,7 +16,8 @@ const Login = (props) => {
             headers: {cpf: values.cpf, senha: values.password}
           };
         axios(instance).then((e) =>{
-            localStorage.setItem('token', e.data.token);
+            localStorage.setItem('token', "Bearer "+e.data.token);
+            document.body.className="";
             props.history.push("/")
         }).catch((err) => console.log(err))
         
@@ -27,7 +28,7 @@ const Login = (props) => {
     })
 
     return(
-        <div className="container-login">
+        <div>
             <div className="bg-form row">
                 <div className="form-fields col-md-6 col-sm-12 align-self-center">
                     <div className="login-title">Autenticação de Usuário</div>
