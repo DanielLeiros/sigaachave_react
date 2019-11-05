@@ -23,13 +23,12 @@ const CadastroReserva = (props) => {
 
     const handleSubmit = (values) => {
         const token = getToken()        
-        axios.post(`http://localhost:8080/sigaachave/reserva/adicionar?idUsuario=1&sala=${values.sala}
-            &dataConsulta=${values.data}&horaConsulta=${values.horario}&isFixa=${values.isFixo}`
+        axios.post(`http://localhost:8080/sigaachave/reserva/adicionar?idUsuario=1&sala=${values.sala}&dataConsulta=${values.data}&horaConsulta=${values.horario}&isFixa=${values.isFixo}`
          ).then(() =>alert("Deu certo")).catch(err => alert("Não foi possível registrar a reserva o usuário..."))
     }
 
     const validations = yup.object().shape({
-        sala:yup.string().required("Digite uma sala válida"),
+        sala:yup.string().required("Selecione uma sala válida"),
         data:yup.string().min(10).required(),
         horario:yup.string().required(),
     })
@@ -66,6 +65,7 @@ const CadastroReserva = (props) => {
                                     <div className="form-group text-left col-6">
                                         <label className="exemple-sala">Sala:</label>
                                         <Field name="sala" className="form-control" component="select">
+                                            <option value={null}>Selecione uma sala</option> 
                                             {salas.map((element, index) => {
                                                 return <option key={index} value={element.nome}>{element.nome}</option>  
                                             })}    

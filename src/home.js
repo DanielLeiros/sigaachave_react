@@ -18,7 +18,7 @@ class ListagemReservas extends React.Component {
 
     getReservas = () => {
 		const token = getToken()
-    	axios.get("http://localhost:8080/sigaachave/reservas/status?status=CONFIRMADA").then(response =>{
+    	axios.get("http://localhost:8080/sigaachave/reservas").then(response =>{
 			this.setState({listaReservas: response.data})
     	}).catch(saida => console.log(saida))
     }

@@ -19,6 +19,7 @@ class ListagemUsuarios extends React.Component {
     getUsuarios = () => {
 		const token = getToken();
     	axios.get("http://localhost:8080/sigaachave/usuarios").then(response =>{
+			console.log(response)
 			this.setState({listaUsuarios: response.data})
     	}).catch(saida => console.log(saida))
     }
