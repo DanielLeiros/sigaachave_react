@@ -18,7 +18,7 @@ class ListagemChamados extends React.Component {
 
     getChamados = () => {
 		const token = getToken()
-    	axios.get("http://localhost:8080/sigaachave/chamados", {headers:{token: token }}).then(response =>{
+    	axios.get("http://localhost:8080/sigaachave/chamados").then(response =>{
 			this.setState({listaChamados: response.data})
     	}).catch(saida => console.log(saida))
     }
@@ -28,7 +28,6 @@ class ListagemChamados extends React.Component {
 		const instance = {
             method: 'delete',
             url: "http://localhost:8080/sigaachave/chamado/excluir?id="+id,
-            headers: {token: token}
           };
     	axios(instance).then(response =>{
 			this.getChamados()
@@ -41,7 +40,6 @@ class ListagemChamados extends React.Component {
 		const instance = {
             method: 'put',
             url: `http://localhost:8080/sigaachave/chamado/atualizar?id=${id}&status=CONFIRMADO&sala=${sala}`,
-            headers: {token: token}
           };
     	axios(instance).then(response =>{
 			this.getChamados()
@@ -54,7 +52,6 @@ class ListagemChamados extends React.Component {
 		const instance = {
             method: 'put',
             url: `http://localhost:8080/sigaachave/chamado/atualizar?id=${id}&status=EM_EXECUCAO&sala=${sala}`,
-            headers: {token: token}
           };
     	axios(instance).then(response =>{
 			this.getChamados()

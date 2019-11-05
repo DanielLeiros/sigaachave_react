@@ -18,7 +18,7 @@ class ListagemSalas extends React.Component {
 
     getSalas = () => {
 		const token = getToken()
-    	axios.get("http://localhost:8080/sigaachave/salas", {headers:{token: token }}).then(response =>{
+    	axios.get("http://localhost:8080/sigaachave/salas").then(response =>{
 			this.setState({listaSalas: response.data})
     	}).catch(saida => console.log(saida))
     }
@@ -28,7 +28,6 @@ class ListagemSalas extends React.Component {
 		const instance = {
             method: 'delete',
             url: "http://localhost:8080/sigaachave/sala/excluir?id="+id,
-            headers: {token: token}
           };
     	axios(instance).then(response =>{
 			this.getSalas()

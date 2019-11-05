@@ -18,7 +18,7 @@ class ListagemUsuarios extends React.Component {
 
     getUsuarios = () => {
 		const token = getToken();
-    	axios.get("http://localhost:8080/sigaachave/usuarios", {headers: {token: token}}).then(response =>{
+    	axios.get("http://localhost:8080/sigaachave/usuarios").then(response =>{
 			this.setState({listaUsuarios: response.data})
     	}).catch(saida => console.log(saida))
     }
@@ -28,7 +28,6 @@ class ListagemUsuarios extends React.Component {
 		const instance = {
             method: 'delete',
             url: "http://localhost:8080/sigaachave/usuario/excluir?id="+id,
-            headers: {token: token}
           };
     	axios(instance).then(response =>{
 			this.getUsuarios()

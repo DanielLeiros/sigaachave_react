@@ -9,7 +9,6 @@ import { getToken } from '../security/auth';
 const CadastroUser = (props) => {
     const handleSubmit = (values) => {  
         const token = getToken()        
-        console.log(token)
         axios.post(`http://localhost:8080/sigaachave/usuario/adicionar?nome=${values.nome}&cpf=${values.cpf}&senha=${values.password}&papel=${values.tipoUsuario}`
                  ).then(() =>alert("Deu certo")).catch(err => alert("Não foi possível cadastrar o usuário..."))
     }

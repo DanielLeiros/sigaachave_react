@@ -18,7 +18,7 @@ class ReservasPendentes extends React.Component {
 
     getReservas = () => {
 		const token = getToken()
-    	axios.get("http://localhost:8080/sigaachave/reservas/status?status=PENDENTE", {headers:{token:token}}).then(response =>{
+    	axios.get("http://localhost:8080/sigaachave/reservas/status?status=PENDENTE").then(response =>{
 			this.setState({listaReservas: response.data})
     	}).catch(saida => console.log(saida))
     }
@@ -28,7 +28,6 @@ class ReservasPendentes extends React.Component {
 		const instance = {
             method: 'put',
             url: "http://localhost:8080/sigaachave/reserva/atualizar?id="+id+"&status=" + status,
-            headers: {token: token}
 		  };
 		  console.log(instance)
     	axios(instance).then(response =>{

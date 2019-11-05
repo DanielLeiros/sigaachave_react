@@ -24,7 +24,7 @@ const CadastroReserva = (props) => {
     const handleSubmit = (values) => {
         const token = getToken()        
         axios.post(`http://localhost:8080/sigaachave/reserva/adicionar?idUsuario=1&sala=${values.sala}
-            &dataConsulta=${values.data}&horaConsulta=${values.horario}&isFixa=${values.isFixo}`, {headers:{token: token }}
+            &dataConsulta=${values.data}&horaConsulta=${values.horario}&isFixa=${values.isFixo}`
          ).then(() =>alert("Deu certo")).catch(err => alert("Não foi possível registrar a reserva o usuário..."))
     }
 

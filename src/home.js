@@ -18,7 +18,7 @@ class ListagemReservas extends React.Component {
 
     getReservas = () => {
 		const token = getToken()
-    	axios.get("http://localhost:8080/sigaachave/reservas/status?status=CONFIRMADA", {headers:{token: token }}).then(response =>{
+    	axios.get("http://localhost:8080/sigaachave/reservas/status?status=CONFIRMADA").then(response =>{
 			this.setState({listaReservas: response.data})
     	}).catch(saida => console.log(saida))
     }
@@ -28,7 +28,6 @@ class ListagemReservas extends React.Component {
 		const instance = {
             method: 'delete',
             url: "http://localhost:8080/sigaachave/reserva/excluir?id="+id,
-            headers: {token: token}
           };
     	axios(instance).then(response =>{
 			this.getReservas()

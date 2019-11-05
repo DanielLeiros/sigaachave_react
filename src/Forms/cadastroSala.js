@@ -11,7 +11,7 @@ const CadastroSalas = (props) => {
     const handleSubmit = (values) => {    
         const token = getToken()      
         axios.post(`http://localhost:8080/sigaachave/sala/adicionar?nome=${values.nome}&localizacao=${values.localizacao}&descricao=${values.descricao}
-         &permiteFixo=${values.permiteFixo}`, {headers: {token:token}}
+         &permiteFixo=${values.permiteFixo}`
          ).then(() =>alert("Deu certo")).catch(err => alert("Não foi possível cadastrar o usuário..."))
     }
     const validations = yup.object().shape({

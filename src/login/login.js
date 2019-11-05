@@ -18,7 +18,7 @@ const Login = (props) => {
         const instance = {
             method: 'post',
             url: 'http://localhost:8080/authenticate',
-            headers: {cpf: values.cpf, senha: values.password}
+            // headers: {cpf: values.cpf, senha: values.password}
           };
         axios(instance).then((e) =>{
             localStorage.setItem('token', "Bearer "+e.data.token);

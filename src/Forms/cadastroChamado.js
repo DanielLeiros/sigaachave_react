@@ -24,7 +24,7 @@ const CadastroChamado = (props) => {
     const handleSubmit = (values) => {
         const token = getToken()        
         console.log(values.sala)
-        axios({method:'post', url:`http://localhost:8080/sigaachave/chamado/adicionar?idUsuario=1&sala=${values.sala}&descricao=${values.descricao}`, headers:{token: token }}
+        axios({method:'post', url:`http://localhost:8080/sigaachave/chamado/adicionar?idUsuario=1&sala=${values.sala}&descricao=${values.descricao}`}
          ).then(() =>alert("Deu certo")).catch(err => alert("Não foi possível registrar o chamado..."))
     }
 
