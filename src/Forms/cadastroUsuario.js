@@ -11,11 +11,11 @@ const CadastroUser = (props) => {
         const token = getToken()        
         console.log(token)
         axios.post(`http://localhost:8080/sigaachave/usuario/adicionar?nome=${values.nome}&cpf=${values.cpf}&senha=${values.password}&papel=${values.tipoUsuario}`
-                 ).then(() =>alert("Deu certo")).catch(err => alert("Não foi possível cadastrar o usuário..."))
+                 ).then(() =>alert("Usuário cadastrado com sucesso")).catch(err => alert("Não foi possível cadastrar o usuário..."))
     }
     const validations = yup.object().shape({
         nome:yup.string().required("Campo nome é obrigatório"),
-        cpf:yup.string().min(11).required("Campo CPF é obrigatório"),
+        cpf:yup.string().min(11, "No mínimo 11 caracteres").max(11, "No máximo 11 caracteres").required("Campo CPF é obrigatório"),
         password:yup.string().min(8, "Deve conter no mínimo 8 caracteres").required("Campo senha é obrigatório"),
         passwordConfirm: yup.string().oneOf([yup.ref('password'), null], "Deve ser igual ao campo senha")
         .required('Campo de confirmação de senha é obrigatório')
@@ -29,7 +29,7 @@ const CadastroUser = (props) => {
                     <div className="form-fields col-12 align-self-center">
                         <div className="login-title">Cadastro de Usuário</div>
                         <Formik 
-                            initialValues={{nome:"", password: "", passwordConfirm: "",tipoUsuario: "USUARIO", cpf: ""}}
+                            initialValues={{nome:"", password: "", passwordConfirm: "",tipoUsuario: "BOLSISTA", cpf: ""}}
                             onSubmit={handleSubmit}
                             validationSchema={validations}
                         >
@@ -49,20 +49,20 @@ const CadastroUser = (props) => {
                                     <div className="form-group text-left col-6">
                                         <label className="exemple-Tipo">Tipo de usuário:</label>
                                         <Field className="form-control" component="select" name="tipoUsuario">
-                                            <option value="USUARIO">Comum</option>
                                             <option value="ADMIN">Administrador</option>
+                                            <option value="BOLSISTA">Bolsista</option>
                                             <option value="COORDENADOR">Coordenador</option>
                                         </Field>
                                         <ErrorMessage className="form-error" name="tipoUsuario" component="span"/>  
                                     </div>
                                     <div className="form-group text-left col-6">
                                     <label className="exemple-password">Senha:</label>
-                                        <Field name="password" className="form-control" placeholder="Senha"/>
+                                        <Field name="password" className="form-control" placeholder="Senha" type="password"/>
                                         <ErrorMessage className="form-error" name="password" component="span"/>
                                     </div>
                                     <div className="form-group text-left col-6">
                                         <label className="exemple-passwordConfirm">Confirmar senha:</label>
-                                        <Field name="passwordConfirm" className="form-control" placeholder="Confirmar senha"/>
+                                        <Field name="passwordConfirm" className="form-control" placeholder="Confirmar senha" type="password"/>
                                         <ErrorMessage className="form-error" name="passwordConfirm" component="span"/>
                                     </div>
                                 </div>

@@ -46,7 +46,6 @@ class ListagemUsuarios extends React.Component {
 					<table>
 						<thead>
 							<tr>
-								<th>Id</th>
 								<th>Nome</th>
 								<th>Perfil</th>
 								<th>Ações</th>
@@ -56,7 +55,6 @@ class ListagemUsuarios extends React.Component {
 						{listaUsuarios.map( (item, key) => {
 								return (
 									<tr key={key}>
-										<td>{item.id}</td>
 										<td>{item.nome}</td>
 										<td>{item.papel}</td>
 										<td><i className="r-icon fas fa-trash-alt clicavel" 

@@ -25,7 +25,7 @@ const CadastroReserva = (props) => {
         const token = getToken()        
         axios.post(`http://localhost:8080/sigaachave/reserva/adicionar?idUsuario=1&sala=${values.sala}
             &dataConsulta=${values.data}&horaConsulta=${values.horario}&isFixa=${values.isFixo}`, {headers:{token: token }}
-         ).then(() =>alert("Deu certo")).catch(err => alert("Não foi possível registrar a reserva o usuário..."))
+         ).then(() =>alert("Reserva realizada com sucesso")).catch(err => alert("Não foi possível registrar a reserva..."))
     }
 
     const validations = yup.object().shape({
@@ -42,7 +42,7 @@ const CadastroReserva = (props) => {
                     <div className="form-fields col-12 align-self-center">
                         <div className="login-title">Solicitar Reserva</div>
                         <Formik 
-                            initialValues={{sala: "", data: "", isFixo: "false"}}
+                            initialValues={{sala: "", data: "", isFixo: "false", horario: ""}}
                             onSubmit={handleSubmit}
                             validationSchema={validations}
                         >
@@ -66,8 +66,9 @@ const CadastroReserva = (props) => {
                                     <div className="form-group text-left col-6">
                                         <label className="exemple-sala">Sala:</label>
                                         <Field name="sala" className="form-control" component="select">
+                                            <option value={null}>Selecione uma sala</option>
                                             {salas.map((element, index) => {
-                                                return <option key={index} value={element.nome}>{element.nome}</option>  
+                                                return <option key={index} value={element.id}>{element.nome}</option>  
                                             })}    
                                         </Field>
                                         <ErrorMessage className="form-error" name="sala" component="span"/>                               

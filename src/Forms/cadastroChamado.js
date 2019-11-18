@@ -24,8 +24,8 @@ const CadastroChamado = (props) => {
     const handleSubmit = (values) => {
         const token = getToken()        
         console.log(values.sala)
-        axios({method:'post', url:`http://localhost:8080/sigaachave/chamado/adicionar?idUsuario=1&sala=${values.sala}&descricao=${values.descricao}`, headers:{token: token }}
-         ).then(() =>alert("Deu certo")).catch(err => alert("Não foi possível registrar o chamado..."))
+        axios({method:'post', url:`http://localhost:8080/sigaachave/chamado/adicionar?idUsuario=1&idSala=${values.sala}&descricao=${values.descricao}`, headers:{token: token }}
+         ).then(() =>alert("Chamado registrado com sucesso!")).catch(err => alert("Não foi possível registrar o chamado..."))
     }
 
     const validations = yup.object().shape({
@@ -51,8 +51,9 @@ const CadastroChamado = (props) => {
                                     <div className="form-group text-left col-6">
                                         <label className="exemple-sala">Sala:</label>
                                         <Field name="sala" className="form-control" component="select">
+                                            <option value={null}>Selecione uma sala</option>
                                             {salas.map((element, index) => {
-                                                return <option key={index} value={element.nome}>{element.nome}</option>  
+                                                return <option key={index} value={element.id}>{element.nome}</option>  
                                             })}    
                                         </Field>
                                         <ErrorMessage className="form-error" name="sala" component="span"/>                               

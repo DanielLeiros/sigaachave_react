@@ -19,6 +19,7 @@ class ListagemChamados extends React.Component {
     getChamados = () => {
 		const token = getToken()
     	axios.get("http://localhost:8080/sigaachave/chamados", {headers:{token: token }}).then(response =>{
+			console.log(response.data)
 			this.setState({listaChamados: response.data})
     	}).catch(saida => console.log(saida))
     }
@@ -40,7 +41,7 @@ class ListagemChamados extends React.Component {
 		const token = getToken()
 		const instance = {
             method: 'put',
-            url: `http://localhost:8080/sigaachave/chamado/atualizar?id=${id}&status=CONFIRMADO&sala=${sala}`,
+            url: `http://localhost:8080/sigaachave/chamado/atualizar?id=${id}&status=CONFIRMADO&idSala=${sala}`,
             headers: {token: token}
           };
     	axios(instance).then(response =>{
@@ -53,7 +54,7 @@ class ListagemChamados extends React.Component {
 		const token = getToken()
 		const instance = {
             method: 'put',
-            url: `http://localhost:8080/sigaachave/chamado/atualizar?id=${id}&status=EM_EXECUCAO&sala=${sala}`,
+            url: `http://localhost:8080/sigaachave/chamado/atualizar?id=${id}&status=EM_EXECUCAO&idSala=${sala}`,
             headers: {token: token}
           };
     	axios(instance).then(response =>{
@@ -72,7 +73,6 @@ class ListagemChamados extends React.Component {
 					<table>
 						<thead>
 							<tr>
-								<th>Id</th>
 								<th>Sala</th>
 								<th>Descrição</th>
 								<th>Status</th>
@@ -83,7 +83,6 @@ class ListagemChamados extends React.Component {
 						{listaChamados.map( (item, key) => {
 								return (
 									<tr key={key}>
-										<td>{item.id}</td>
 										<td>{item.sala}</td>
 										<td>{item.descricao}</td>
 										<td>{item.status}</td>

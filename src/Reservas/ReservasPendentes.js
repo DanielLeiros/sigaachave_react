@@ -23,14 +23,13 @@ class ReservasPendentes extends React.Component {
     	}).catch(saida => console.log(saida))
     }
 
-    alterarStatusReserva = (id, status) => {
+    alterarStatusReserva = (id, sala, status) => {
 		const token = getToken()		
 		const instance = {
             method: 'put',
-            url: "http://localhost:8080/sigaachave/reserva/atualizar?id="+id+"&status=" + status,
+            url: "http://localhost:8080/sigaachave/reserva/atualizar?id="+id+"&status=" + status + "&idSala=" + sala,
             headers: {token: token}
 		  };
-		  console.log(instance)
     	axios(instance).then(response =>{
 			this.getReservas("PENDENTES")
 			alert("Ação confirmada!")
@@ -69,7 +68,7 @@ class ReservasPendentes extends React.Component {
 										<td>
 
 										<i className="g-icon fas fa-check clicavel" 
-												onClick={() => this.alterarStatusReserva(item.id, "CONFIRMADA")}>
+												onClick={() => this.alterarStatusReserva(item.id, item.sala,  "CONFIRMADA")}>
 											</i>
 										<i className="r-icon fas fa-times clicavel" 
 												onClick={() => this.alterarStatusReserva(item.id, "CANCELADA")}>

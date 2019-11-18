@@ -46,7 +46,6 @@ class ListagemReservas extends React.Component {
 					<table>
 						<thead>
 							<tr>
-								<th>Id</th>
 								<th>Sala</th>
 								<th>Data</th>
 								<th>Hora</th>
@@ -59,7 +58,6 @@ class ListagemReservas extends React.Component {
 						{listaReservas.map( (item, key) => {
 								return (
 									<tr key={key}>
-										<td>{item.id}</td>
 										<td>{item.sala}</td>
 										<td>{item.dataConsulta}</td>
 										<td>{item.horaConsulta + "h"}</td>
