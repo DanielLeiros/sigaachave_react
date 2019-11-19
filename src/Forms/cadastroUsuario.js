@@ -41,7 +41,7 @@ const CadastroUser = (props) => {
                                 <div className="row justify-content-center">
                                     <div className="form-group text-left col-6">
                                         <label className="exemple-name">Nome:</label>
-                                        <Field name="nome" className="form-control" placeholder="Nome" maxLength={25}/>
+                                        <Field name="nome" className="form-control" placeholder="Nome" maxLength={40}/>
                                         <ErrorMessage className="form-error" name="nome" component="span"/>                               
                                     </div>
                                     <div className="form-group text-left col-6">

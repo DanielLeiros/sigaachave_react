@@ -20,6 +20,7 @@ class ListagemSalas extends React.Component {
 		const token = getToken()
     	axios.get("http://localhost:8080/sigaachave/salas", {headers:{token: token }}).then(response =>{
 			this.setState({listaSalas: response.data})
+			console.log(response.data)
     	}).catch(saida => console.log(saida))
     }
 
@@ -32,8 +33,8 @@ class ListagemSalas extends React.Component {
           };
     	axios(instance).then(response =>{
 			this.getSalas()
-			alert("Deletada!")
-    	}).catch(saida => console.log(saida))
+			alert("Sala deletada com sucesso!")
+    	}).catch(saida => alert("Não foi possível remover a sala, é possível que ela possua alguma reserva ou chamado cadastrado. Se persistir contate o suporte."))
     }
 
 	render(){

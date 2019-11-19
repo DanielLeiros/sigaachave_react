@@ -33,7 +33,7 @@ class ListagemChamados extends React.Component {
           };
     	axios(instance).then(response =>{
 			this.getChamados()
-			alert("Deletada!")
+			alert("Chamado cancelado!")
     	}).catch(saida => console.log(saida))
     }
 
@@ -88,10 +88,10 @@ class ListagemChamados extends React.Component {
 										<td>{item.status}</td>
 										<td>
 											<i className="g-icon fas fa-check clicavel" 
-													onClick={() => this.aceitarChamado(item.id, item.sala)}>
+													onClick={() => this.aceitarChamado(item.id, item.idSala)}>
 											</i>
 											<i className="y-icon fas fa-clock clicavel" 
-													onClick={() => this.executarChamado(item.id,item.sala)}>
+													onClick={() => this.executarChamado(item.id,item.idSala)}>
 											</i>
 											<i className="r-icon fas fa-trash-alt clicavel" 
 													onClick={() => this.deletarChamado(item.id)}>

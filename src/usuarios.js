@@ -32,7 +32,7 @@ class ListagemUsuarios extends React.Component {
           };
     	axios(instance).then(response =>{
 			this.getUsuarios()
-			alert("Deletado!")
+			alert("Usuário deletado!")
     	}).catch(saida => console.log(saida))
     }
 

@@ -32,8 +32,12 @@ class ReservasPendentes extends React.Component {
 		  };
     	axios(instance).then(response =>{
 			this.getReservas("PENDENTES")
-			alert("Ação confirmada!")
-    	}).catch(saida => console.log(saida))
+			status === "CONFIRMADA" ? alert("Reserva confirmada!") : alert("Reserva cancelada!")  	
+    	}).catch(saida => {
+			console.log(saida)
+			alert("Não foi possível realizar a ação, tente novamente ou contate nosso suporte!")
+		}
+			)
     }
 
 	render(){
@@ -66,10 +70,10 @@ class ReservasPendentes extends React.Component {
 										<td>
 
 										<i className="g-icon fas fa-check clicavel" 
-												onClick={() => this.alterarStatusReserva(item.id, item.sala,  "CONFIRMADA")}>
+												onClick={() => this.alterarStatusReserva(item.id, item.idSala,  "CONFIRMADA")}>
 											</i>
 										<i className="r-icon fas fa-times clicavel" 
-												onClick={() => this.alterarStatusReserva(item.id, "CANCELADA")}>
+												onClick={() => this.alterarStatusReserva(item.id, item.idSala, "CANCELADA")}>
 											</i>
 
 										</td>

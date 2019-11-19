@@ -32,7 +32,7 @@ class ListagemReservas extends React.Component {
           };
     	axios(instance).then(response =>{
 			this.getReservas()
-			alert("Deletada!")
+			alert("Reserva deletada com sucesso!")
     	}).catch(saida => console.log(saida))
     }
 
