@@ -25,12 +25,15 @@ const CadastroChamado = (props) => {
         const token = getToken()        
         console.log(values.sala)
         axios({method:'post', url:`http://localhost:8080/sigaachave/chamado/adicionar?idUsuario=1&idSala=${values.sala}&descricao=${values.descricao}`, headers:{token: token }}
-         ).then(() =>alert("Chamado registrado com sucesso!")).catch(err => alert("Não foi possível registrar o chamado..."))
+         ).then(() =>{
+             alert("Chamado registrado com sucesso!")
+             props.history.push("/listagem-chamados")
+            }).catch(err => alert("Não foi possível registrar o chamado..."))
     }
 
     const validations = yup.object().shape({
         sala:yup.string().required("Insira uma sala válida"),
-        descricao:yup.string().required(),
+        descricao:yup.string().min(10, "Tamanho mínimo de 10 caracteres").required(),
     })
 
     return(
@@ -60,7 +63,7 @@ const CadastroChamado = (props) => {
                                     </div>
                                    <div className="form-group text-left col-6">
                                         <label className="exemple-descricao">Descrição:</label>
-                                        <Field name="descricao" className="form-control" type="text-area" placeholder="Descrição"/>
+                                        <Field name="descricao" className="form-control" type="text-area" placeholder="Descrição" maxLength={150}/>
                                         <ErrorMessage className="form-error" name="descricao" component="span"/>                               
                                     </div>
                                 </div>

@@ -25,7 +25,10 @@ const CadastroReserva = (props) => {
         const token = getToken()        
         axios.post(`http://localhost:8080/sigaachave/reserva/adicionar?idUsuario=1&sala=${values.sala}
             &dataConsulta=${values.data}&horaConsulta=${values.horario}&isFixa=${values.isFixo}`, {headers:{token: token }}
-         ).then(() =>alert("Reserva realizada com sucesso")).catch(err => alert("Não foi possível registrar a reserva..."))
+         ).then(() =>{
+             alert("Reserva realizada com sucesso")
+             props.history.push("/")
+            }).catch(err => alert("Não foi possível registrar a reserva..."))
     }
 
     const validations = yup.object().shape({

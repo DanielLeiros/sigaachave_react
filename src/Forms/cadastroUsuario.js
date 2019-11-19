@@ -11,10 +11,13 @@ const CadastroUser = (props) => {
         const token = getToken()        
         console.log(token)
         axios.post(`http://localhost:8080/sigaachave/usuario/adicionar?nome=${values.nome}&cpf=${values.cpf}&senha=${values.password}&papel=${values.tipoUsuario}`
-                 ).then(() =>alert("Usuário cadastrado com sucesso")).catch(err => alert("Não foi possível cadastrar o usuário..."))
+                 ).then(() => {
+                     alert("Usuário cadastrado com sucesso")
+                     props.history.push("/listagem-usuarios")
+                    }).catch(err => alert("Não foi possível cadastrar o usuário..."))
     }
     const validations = yup.object().shape({
-        nome:yup.string().required("Campo nome é obrigatório"),
+        nome:yup.string().min(3, "Tamanho mínimo de 3 caracteres").required("Campo nome é obrigatório"),
         cpf:yup.string().min(11, "No mínimo 11 caracteres").max(11, "No máximo 11 caracteres").required("Campo CPF é obrigatório"),
         password:yup.string().min(8, "Deve conter no mínimo 8 caracteres").required("Campo senha é obrigatório"),
         passwordConfirm: yup.string().oneOf([yup.ref('password'), null], "Deve ser igual ao campo senha")
@@ -38,12 +41,12 @@ const CadastroUser = (props) => {
                                 <div className="row justify-content-center">
                                     <div className="form-group text-left col-6">
                                         <label className="exemple-name">Nome:</label>
-                                        <Field name="nome" className="form-control" placeholder="Nome"/>
+                                        <Field name="nome" className="form-control" placeholder="Nome" maxLength={25}/>
                                         <ErrorMessage className="form-error" name="nome" component="span"/>                               
                                     </div>
                                     <div className="form-group text-left col-6">
                                         <label className="exemple-cpf">Cpf:</label>
-                                        <Field name="cpf" className="form-control" placeholder="cpf"/>
+                                        <Field name="cpf" className="form-control" placeholder="Cpf (apenas números)" maxLength={11}/>
                                         <ErrorMessage className="form-error" name="cpf" component="span"/>                               
                                     </div>
                                     <div className="form-group text-left col-6">
@@ -57,12 +60,12 @@ const CadastroUser = (props) => {
                                     </div>
                                     <div className="form-group text-left col-6">
                                     <label className="exemple-password">Senha:</label>
-                                        <Field name="password" className="form-control" placeholder="Senha" type="password"/>
+                                        <Field name="password" className="form-control" placeholder="Senha" type="password" maxLength={25}/>
                                         <ErrorMessage className="form-error" name="password" component="span"/>
                                     </div>
                                     <div className="form-group text-left col-6">
                                         <label className="exemple-passwordConfirm">Confirmar senha:</label>
-                                        <Field name="passwordConfirm" className="form-control" placeholder="Confirmar senha" type="password"/>
+                                        <Field name="passwordConfirm" className="form-control" placeholder="Confirmar senha" type="password" maxLength={25}/>
                                         <ErrorMessage className="form-error" name="passwordConfirm" component="span"/>
                                     </div>
                                 </div>

@@ -12,7 +12,10 @@ const CadastroSalas = (props) => {
         const token = getToken()      
         axios.post(`http://localhost:8080/sigaachave/sala/adicionar?nome=${values.nome}&localizacao=${values.localizacao}&descricao=${values.descricao}
          &permiteFixo=${values.permiteFixo}`, {headers: {token:token}}
-         ).then(() =>alert("Sala cadastrada com sucesso")).catch(err => alert("Não foi possível cadastrar a sala..."))
+         ).then(() =>{
+            alert("Sala cadastrada com sucesso");
+            props.history.push("/listagem-salas")
+         }).catch(err => alert("Não foi possível cadastrar a sala..."))
     }
     const validations = yup.object().shape({
         nome:yup.string().required("Digite um nome válido"),
@@ -38,13 +41,13 @@ const CadastroSalas = (props) => {
                                     
                                     <div className="form-group text-left col-6">
                                         <label className="exemple-nome">Nome:</label>
-                                        <Field name="nome" className="form-control" placeholder="Nome"/>
+                                        <Field name="nome" className="form-control" placeholder="Nome" maxLength={25}/>
                                         <ErrorMessage className="form-error" name="nome" component="span"/>                               
                                     </div>
                                     
                                     <div className="form-group text-left col-6">
                                         <label className="exemple-localizacao">Localização:</label>
-                                        <Field name="localizacao" className="form-control" placeholder="Localização"/>
+                                        <Field name="localizacao" className="form-control" placeholder="Localização" maxLength={100}/>
                                         <ErrorMessage className="form-error" name="data" component="span"/>
                                     </div>
                                                                         
@@ -59,7 +62,7 @@ const CadastroSalas = (props) => {
 
                                     <div className="form-group text-left col-6">
                                         <label className="exemple-descricao">Descrição:</label>
-                                        <Field name="descricao" component="textarea" className="form-control" placeholder="Descrição"/>
+                                        <Field name="descricao" component="textarea" className="form-control" placeholder="Descrição" maxLength={150}/>
                                         <ErrorMessage className="form-error" name="descricao" component="span"/>
                                     </div>
 

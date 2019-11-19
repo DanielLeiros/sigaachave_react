@@ -21,7 +21,7 @@ const Login = (props) => {
             headers: {cpf: values.cpf, senha: values.password}
           };
         axios(instance).then((e) =>{
-            localStorage.setItem('token', "Bearer "+e.data.token);
+            sessionStorage.setItem('token', "Bearer "+e.data.token);
             props.history.push("/")
         }).catch((err) => console.log(err))
         
