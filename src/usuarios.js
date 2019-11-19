@@ -4,6 +4,13 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import { getToken } from './security/auth';
 
+const tiposUsuario = {
+	ADMIN: "Administrador",
+	BOLSISTA: "Bolsista/Voluntário",
+	COORDENADOR: "Coordenador",
+}
+
+
 class ListagemUsuarios extends React.Component {
 	constructor(props){
 		super(props);
@@ -56,7 +63,7 @@ class ListagemUsuarios extends React.Component {
 								return (
 									<tr key={key}>
 										<td>{item.nome}</td>
-										<td>{item.papel}</td>
+										<td>{tiposUsuario[item.papel]}</td>
 										<td><i className="r-icon fas fa-trash-alt clicavel" 
 												onClick={() => this.deletarUsuario(item.id)}>
 											</i>

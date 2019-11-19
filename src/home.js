@@ -62,7 +62,7 @@ class ListagemReservas extends React.Component {
 										<td>{item.dataConsulta}</td>
 										<td>{item.horaConsulta + "h"}</td>
 										<td>{item.isFixo ? "Fixo" : "Não-Fixo"}</td>
-										<td>{item.status}</td>
+										<td>{tiposReserva[item.status]}</td>
 										<td>
 
 										<i className="r-icon fas fa-trash-alt clicavel" 
@@ -81,6 +81,12 @@ class ListagemReservas extends React.Component {
 }
 
 export default ListagemReservas;
+
+const tiposReserva = {
+	CONFIRMADA: 'Confirmada',
+	CANCELADA: 'Cancelada',
+	PENDENTE: 'Pendente'
+}
 
 
 /*

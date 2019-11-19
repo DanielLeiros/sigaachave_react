@@ -66,7 +66,7 @@ class ReservasPendentes extends React.Component {
 										<td>{item.dataConsulta}</td>
 										<td>{item.horaConsulta + "h"}</td>
 										<td>{item.isFixo ? "Fixo" : "Não-Fixo"}</td>
-										<td>{item.status}</td>
+										<td>{tiposReserva[item.status]}</td>
 										<td>
 
 										<i className="g-icon fas fa-check clicavel" 
@@ -89,3 +89,9 @@ class ReservasPendentes extends React.Component {
 }
 
 export default ReservasPendentes;
+
+const tiposReserva = {
+	CONFIRMADA: 'Confirmada',
+	CANCELADA: 'Cancelada',
+	PENDENTE: 'Pendente'
+}

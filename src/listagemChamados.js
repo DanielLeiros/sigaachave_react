@@ -4,6 +4,14 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import { getToken } from './security/auth';
 
+const tiposChamado = {
+	EM_EXECUCAO: "Em execução",
+	CONFIRMADO: "Confirmado",
+	FINALIZADO: "Finalizado",
+	CANCELADO: "Cancelado",
+	PENDENTE: "Pendente"
+}
+
 class ListagemChamados extends React.Component {
 	constructor(props){
 		super(props);
@@ -85,7 +93,7 @@ class ListagemChamados extends React.Component {
 									<tr key={key}>
 										<td>{item.sala}</td>
 										<td>{item.descricao}</td>
-										<td>{item.status}</td>
+										<td>{tiposChamado[item.status]}</td>
 										<td>
 											<i className="g-icon fas fa-check clicavel" 
 													onClick={() => this.aceitarChamado(item.id, item.idSala)}>

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import './login.css';
 import logo from '../images/logo-n-bg.png';
 import img from '../images/ufrn-reitoria.jpg';
